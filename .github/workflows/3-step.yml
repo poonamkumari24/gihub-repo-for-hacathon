@@ -1,3 +1,4 @@
+
 name: Step 3
 
 on:
@@ -31,6 +32,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v5
+        with:
+          fetch-depth: 0
 
       - name: Get response templates
         uses: actions/checkout@v5
@@ -163,7 +166,7 @@ jobs:
 
       - name: Disable current workflow and enable next one
         run: |
-          gh workflow disable "${{github.workflow}}"
+          gh workflow disable "${{ github.workflow }}"
           gh workflow enable "Step 4"
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}

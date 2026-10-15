@@ -40,3 +40,6 @@ Thumbs.db
 .actrc*
 
 __pycache__/
+# Python generated files
+*.py[cod]
+.pytest_cache/

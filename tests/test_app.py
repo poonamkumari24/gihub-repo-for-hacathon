@@ -25,6 +25,9 @@ def test_signup_adds_participant_when_activity_has_space(client):
     )
 
     assert response.status_code == 200
+    assert response.json()["message"] == (
+        "Signed up new@mergington.edu for Chess Club"
+    )
     assert app_module.activities["Chess Club"]["participants"] == [
         "existing@mergington.edu",
         "new@mergington.edu",
@@ -51,6 +54,7 @@ def test_signup_returns_not_found_for_unknown_activity(client):
     )
 
     assert response.status_code == 404
+    assert response.json()["detail"] == "Activity not found"
 
 
 def test_signup_rejects_duplicate_participant(client):

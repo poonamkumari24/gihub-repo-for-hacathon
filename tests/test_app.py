@@ -51,3 +51,13 @@ def test_signup_returns_not_found_for_unknown_activity(client):
     )
 
     assert response.status_code == 404
+
+
+def test_signup_rejects_duplicate_participant(client):
+    response = client.post(
+        "/activities/Chess Club/signup",
+        params={"email": "existing@mergington.edu"}
+    )
+
+    assert response.status_code == 400
+    assert response.json()["detail"] == "Student is already signed up"
